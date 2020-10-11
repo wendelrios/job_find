@@ -1,0 +1,32 @@
+{
+  "name": "job_find",
+  "version": "1.0.0",
+  "description": "a job find app with Express(Node), Postgres, Sequelize.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wendelrios/job_find.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wendelrios/job_find/issues"
+  },
+  "homepage": "https://github.com/wendelrios/job_find#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "pg": "^8.4.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "sucrase": "^3.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
