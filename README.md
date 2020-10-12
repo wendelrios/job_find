@@ -1,2 +1,2 @@
 # job_find
-a job find app with Express(Node), Postgres, Sequelize.
+Message/User API Express with Postgres
