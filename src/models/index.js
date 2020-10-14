@@ -14,6 +14,8 @@ const models = {
   Message:require('./Message'),
 };
 
+
+
 Object.keys(models).forEach(key => {
   if('associate' in models[key]){
     models[key].associate(models);
