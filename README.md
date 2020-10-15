@@ -1,2 +1,2 @@
 # job_find
-Message/User API Express with Postgres
+API feita, com Express, banco de dados Postgres e JWT, para fins didáticos.
