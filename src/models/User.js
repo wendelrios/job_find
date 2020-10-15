@@ -1,33 +1,35 @@
-const user = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
-    username:{
-      type:DataTypes.STRING,
-      unique:true,
-      allowNull:false,
-      validate:{
-        notEmpty:true,
-      },
-    },
-  });
+import {Sequelize, DataTypes} from 'sequelize';
+import sequelize from '../databaseConfig';
+import bcrypt from 'bcrypt';
 
-  User.associate = models => {
-    User.hasMany(models.Message, {onDelete: 'CASCADE'});
-  };
-
-  User.findByLogin = async login => {
-    const user = await User.findOne({
-      where:{username:login},
-    });
-
-    if(!user){
-      user = await User.findOne({
-        where:{email:login},
-      });
-    }
-  }
-
-  return User;
-}
+const User = sequelize.define('user', {
+  username:{
+    type:DataTypes.STRING,
+    allowNull:false,
+    unique:true,
+  },
+  email:{
+    type:DataTypes.STRING,
+    allowNull:false,
+    unique:true
+  },
+  password:{
+    type:DataTypes.STRING,
+    allowNull:false
+  },
+},{
+  freezeTableName:true,
+  },
+);
 
 
-export default user;
+User.beforeCreate(async (user) => {
+  user.password = await bcrypt.hash(user.password, 10);
+})
+
+
+
+
+module.exports = User;
+
+

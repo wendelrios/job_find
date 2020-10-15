@@ -1,19 +1,20 @@
-const message = (sequelize, DataTypes) => {
-  const Message = sequelize.define('message', {
-    text:{
-      type:DataTypes.STRING,
-      allowNull:false,
-      validate:{
-        notEmpty:true,
-      },
-    }
-  });
+import {Sequelize, DataTypes} from 'sequelize';
+import sequelize from '../databaseConfig';
+import User from './User';
 
-  Message.associate = models => {
-    Message.belongsTo(models.User);
-  }
+const Message = sequelize.define('message', {
+  text:{
+    type:DataTypes.TEXT,
+    allowNull:false,
+  },
+},{
+  underscored:true
+},)
 
-  return Message;
-}
+Message.belongsTo(User);
 
-export default message;
+module.exports = Message;
+
+
+
+
