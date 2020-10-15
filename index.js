@@ -1,10 +1,6 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import 'dotenv/config';
-
-import models from './src/models';
 import sequelize from './src/databaseConfig'
-import {users, messages} from './src/models';
 
 const app = express();
 app.use(express.json());
@@ -18,14 +14,7 @@ sequelize.sync({force:eraseDatabaseOnSync}).then(async () => {
 });
 
 
-app.post('/messages', (req, res) => {
-  
-})
-
-app.get('/', (req, res)=> {
-  res.send('home page')
-})
-
+//user routes
 require('./src/controllers/UserController')(app);
 
 
