@@ -13,3 +13,5 @@ Object.keys(models).forEach(key => {
     models[key].associate(models);
   }
 })
+
+module.exports = models;

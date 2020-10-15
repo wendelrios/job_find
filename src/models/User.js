@@ -1,4 +1,4 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import {DataTypes} from 'sequelize';
 import sequelize from '../databaseConfig';
 import bcrypt from 'bcrypt';
 
@@ -22,13 +22,9 @@ const User = sequelize.define('user', {
   },
 );
 
-
 User.beforeCreate(async (user) => {
   user.password = await bcrypt.hash(user.password, 10);
 })
-
-
-
 
 module.exports = User;
 
