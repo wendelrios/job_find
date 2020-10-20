@@ -19,4 +19,6 @@ module.exports = (req, res, next) => {
   if(!/^Bearer$/i.test(scheme)){
     return res.status(401).send({message:'token malformatted'})
   }
+
+  // jwt.verify()
 }
