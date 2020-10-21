@@ -16,6 +16,7 @@ sequelize.sync({force:eraseDatabaseOnSync}).then(async () => {
 
 //user routes
 require('./src/routes/UserRoutes')(app);
+require('./src/routes/authController')(app);
 
 
 
