@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import User from '../models/User';
+import Message from '../models/Message';
 import token from '../middlewares/token';
 
 const router  = Router();
