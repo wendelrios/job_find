@@ -1,27 +1,15 @@
 import {Router} from 'express';
 import User from '../models/User';
 import Message from '../models/Message';
-import token from '../middlewares/token';
 
 const router  = Router();
-router.use(token);
 
-router.post('/', async (req, res) => {
-
-  const {username, email, password} = req.body;
-  const {token} = req;
-
+router.get('/', async(req, res) => {
   try{
-
-  if(await User.findOne({where:{username:username , email:email}})){
-    return res.send({message:'user already exists'});
-  }
-
-  await User.create({username, email, password});
-  return res.status(200).send({username, email, token});
-
+    const users = await User.findAll({include:Message});
+    return res.status(200).send({users});
   }catch(err){
-    return res.status(400).send({message:'unable to create user'})
+    return res.status(400).send({message:'there was an error with request'})
   }
 })
 

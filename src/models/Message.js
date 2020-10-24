@@ -11,7 +11,6 @@ const Message = sequelize.define('message', {
   underscored:true
 },)
 
-Message.belongsTo(User);
 
 module.exports = Message;
 

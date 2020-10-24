@@ -14,11 +14,14 @@ module.exports = (req, res, next) => {
     res.status(401).send({error:'token error'});
   }
 
-  const [scheme,] = parts;
+  const [scheme,token] = parts;
 
   if(!/^Bearer$/i.test(scheme)){
     return res.status(401).send({message:'token malformatted'})
   }
 
-  // jwt.verify()
+  jwt.verify(token, authConfig.secret, (err, decoded) => {
+    req.userId = decoded.id;
+    return next();
+  })
 }

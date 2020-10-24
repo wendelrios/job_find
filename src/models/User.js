@@ -1,6 +1,7 @@
 import {DataTypes} from 'sequelize';
 import sequelize from '../databaseConfig';
 import bcrypt from 'bcrypt';
+import Message from './Message';
 
 const User = sequelize.define('user', {
   username:{
@@ -21,6 +22,8 @@ const User = sequelize.define('user', {
   freezeTableName:true,
   },
 );
+
+User.hasMany(Message);
 
 User.beforeCreate(async (user) => {
   user.password = await bcrypt.hash(user.password, 10);
