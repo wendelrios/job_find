@@ -3,8 +3,6 @@ import bcrypt from 'bcrypt';
 import User from '../models/User';
 import generateToken from '../resources/token/generateToken';
 
-import auth from '../middlewares/auth';
-
 const router = Router();
 
 router.post('/login', async (req, res) => {
@@ -18,12 +16,14 @@ router.post('/login', async (req, res) => {
     }
 
     if(!(await bcrypt.compare(password, user.password))){
-      return res.status(400).send({message:"invalid password"})
+      return res.status(400).send({message:"invalid password"});
     }
 
     user.password = undefined;
 
-    return res.status(200).send({user,token:generateToken({id: user.username})});
+    
+
+    return res.status(200).send({user, token:generateToken({id:user.id})});
 
 
   }catch(err){

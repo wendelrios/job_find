@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
+import jwt, { decode } from 'jsonwebtoken';
 const authConfig = require('../config/auth.json');
 
 module.exports = (req, res, next) => {
-  const authHeader = req.header('Authorization');
+  const authHeader = req.headers.authorization;
 
   if(!authHeader){
     return res.status(401).send({error:'no token provided'});
@@ -20,8 +20,14 @@ module.exports = (req, res, next) => {
     return res.status(401).send({message:'token malformatted'})
   }
 
-  jwt.verify(token, authConfig.secret, (err, decoded) => {
-    req.userId = decoded.id;
-    return next();
-  })
+  const decoded = jwt.verify(token, authConfig.secret);
+
+  if(typeof decoded === Error){
+    return res.status(401).send({message:"token format is not valid"});
+  }
+
+  req.userId = decoded.id;
+  console.log(req.userId);
+  next();
 }
+
