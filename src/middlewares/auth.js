@@ -17,17 +17,15 @@ module.exports = (req, res, next) => {
   const [scheme,token] = parts;
 
   if(!/^Bearer$/i.test(scheme)){
-    return res.status(401).send({message:'token malformatted'})
+    return res.status(401).send({message:'token malformatted'});
   }
 
-  const decoded = jwt.verify(token, authConfig.secret);
-
-  if(typeof decoded === Error){
-    return res.status(401).send({message:"token format is not valid"});
-  }
-
-  req.userId = decoded.id;
-  console.log(req.userId);
-  next();
+  jwt.verify(token, authConfig.secret, (err, decoded) => {
+    if(err){
+      return res.status(401).send({message:"there was an error with token validation"});
+    }
+    req.userId = decoded.id;
+    next();
+  });
 }
 
