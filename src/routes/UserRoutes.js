@@ -15,9 +15,16 @@ router.get('/', async(req, res) => {
   }
 })
 
-router.get('/username', async(req,res) => {
+router.get('/:username', async(req,res) => {
   try{
-    const user = await User.findOne({where:{username:req.params.username}}, {include:Message});
+    const user = await User.findOne({include: [
+      {
+        model:Message
+      }
+    ],where:{username:req.params.username}})
+    if(!user){
+      return res.send({message:"user not found"});
+    }
     return res.send({user});
   }catch(err){
     return res.status(400).send({message:"there was an error with the request"});
