@@ -33,7 +33,6 @@ router.get('/:username', async(req,res) => {
 
 router.post('/:username/message', async(req, res) => {
   const {text} = req.body
-  console.log(req.userId)
 
   try{
     const message = await Message.create({text, userId:req.userId});
