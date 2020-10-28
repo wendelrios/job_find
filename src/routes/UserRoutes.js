@@ -31,6 +31,19 @@ router.get('/:username', async(req,res) => {
   }
 })
 
+router.post('/:username/message', async(req, res) => {
+  const {text} = req.body
+  const {userId} = req.userId;
+  // console.log(userId);
+
+  try{
+    const message = await Message.create({text, userId:userId});
+    return res.status(200).send({message});
+  }catch(err){
+    return res.send({message:"there was an error with the request"});
+  }
+})
+
 
 module.exports = app => app.use('/users', router);
 
