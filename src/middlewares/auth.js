@@ -1,3 +1,4 @@
+
 import jwt, { decode } from 'jsonwebtoken';
 const authConfig = require('../config/auth.json');
 
@@ -24,7 +25,6 @@ module.exports = (req, res, next) => {
     if(err){
       return res.status(401).send({message:"there was an error with token validation"});
     }
-    console.log(decoded.id)
     req.userId = decoded.id;
     next();
   });
