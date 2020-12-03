@@ -1,5 +1,4 @@
-
-import jwt, { decode } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 const authConfig = require('../config/auth.json');
 
 module.exports = (req, res, next) => {
